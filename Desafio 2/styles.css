@@ -30,10 +30,6 @@ body {
     cursor: pointer;
 }
 
-#turn-indicator {
-    margin-top: 20px;
-}
-
 button {
     margin-top: 20px;
     padding: 10px 20px;
