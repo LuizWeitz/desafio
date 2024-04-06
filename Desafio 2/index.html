@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha Desafio IFSP </title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./script.js"></script>
+</head>
+<body>
+    <div class="game">
+        <h1>Jogo da Velha Desafio IFSP</h1>
+        <div class="quadro" id="quadro">
+            <div class="celula" onclick="verifica(0)"></div>
+            <div class="celula" onclick="verifica(1)"></div>
+            <div class="celula" onclick="verifica(2)"></div>
+            <div class="celula" onclick="verifica(3)"></div>
+            <div class="celula" onclick="verifica(4)"></div>
+            <div class="celula" onclick="verifica(5)"></div>
+            <div class="celula" onclick="verifica(6)"></div>
+            <div class="celula" onclick="verifica(7)"></div>
+            <div class="celula" onclick="verifica(8)"></div>
+        </div>
+        <p id="jogador_atual">Vez do Jogador X</p>
+        <h5 id="log">LOG</h5>
+
+        <button onclick="resetar()">Reiniciar Jogo</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

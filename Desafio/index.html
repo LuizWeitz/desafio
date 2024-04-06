@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eight Queens Challenge</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+  }
+  .square {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    position: relative;
+  }
+  .queen {
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.miximportacao.com.br/wp-content/uploads/2018/01/1000x1000be1ca714ab1e258687aacedbd2bfbb4f.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+  }
+</style>
+</head>
+<body>
+<div class="board">
+  <!-- Generate the chessboard -->
+  <!-- White and black squares are represented by divs with class 'square' -->
+  <!-- Initially, the board is empty -->
+  <!-- Each square has an ID with the format 'square-x-y', where x and y represent the position -->
+  <!-- of the square on the board -->
+  <!-- For example, the top-left square has the ID 'square-0-0' -->
+  <!-- and the bottom-right square has the ID 'square-7-7' -->
+  </div>
+<script>
+  function placeQueen(x, y) {
+    var square = document.getElementById('square-' + x + '-' + y);
+    var queen = document.createElement('div');
+    queen.classList.add('queen');
+    square.appendChild(queen);
+  }
+
+  function isSafe(board, row, col) {
+    // Check if there is a queen in the same column
+    for (var i = 0; i < row; i++) {
+      if (board[i] === col) {
+        return false;
+      }
+    }
+
+    // Check if there is a queen in the upper left diagonal
+    for (var i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+      if (board[i] === j) {
+        return false;
+      }
+    }
+
+    // Check if there is a queen in the upper right diagonal
+    for (var i = row, j = col; i >= 0 && j < 8; i--, j++) {
+      if (board[i] === j) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  function solveNQueensUtil(board, row) {
+    if (row === 8) {
+      // All queens are successfully placed, display the solution
+      for (var i = 0; i < 8; i++) {
+        placeQueen(i, board[i]);
+      }
+      return true;
+    }
+
+    var res = false;
+    for (var i = 0; i < 8; i++) {
+      if (isSafe(board, row, i)) {
+        board[row] = i;
+        res = solveNQueensUtil(board, row + 1) || res;
+        board[row] = undefined; // backtrack
+      }
+    }
+    return res;
+  }
+
+  function solveNQueens() {
+    var board = new Array(8);
+    if (!solveNQueensUtil(board, 0)) {
+      console.log("Solution does not exist");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var board = document.querySelector('.board');
+    for (var i = 0; i < 8; i++) {
+      for (var j = 0; j < 8; j++) {
+        var square = document.createElement('div');
+        square.id = 'square-' + i + '-' + j;
+        square.classList.add('square');
+        board.appendChild(square);
+      }
+    }
+    solveNQueens();
+  });
+</script>
+</body>
+</html>
